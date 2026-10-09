@@ -41,8 +41,8 @@ jobs:
           if [ "$RUNNER_OS" = macOS ]; then
             codesign --verify --strict --verbose=2 "$RUNNER_TEMP/package/remopilot"
             codesign --verify --strict --verbose=2 "$RUNNER_TEMP/package/remopilot-desktop"
-            spctl --assess --type execute --verbose=2 "$RUNNER_TEMP/package/remopilot"
-            spctl --assess --type execute --verbose=2 "$RUNNER_TEMP/package/remopilot-desktop"
+            codesign --verify --strict -R=notarized "$RUNNER_TEMP/package/remopilot"
+            codesign --verify --strict -R=notarized "$RUNNER_TEMP/package/remopilot-desktop"
           fi
       - name: Verify activation and independence from the candidate package
         shell: bash
